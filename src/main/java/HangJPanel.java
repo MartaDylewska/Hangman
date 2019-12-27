@@ -31,7 +31,7 @@ class HangJPanel extends JPanel {
     private JButton confirm;
     private JLabel finalWordField;
     private KeyListener kl;
-    static int totalGamesCounter = 0;
+    static int totalGamesCounter;
 
     HangJPanel(CreatePanel createPanel, LoginPanel loginPanel) {
 
@@ -236,7 +236,7 @@ class HangJPanel extends JPanel {
 
                 //---------OPCJA WYGRANA----------------
                 if (!wordToGuessField.getText().contains("_") && getPointsCounter() < 10) {
-                    totalGamesCounter += 1;
+                    totalGamesCounter++;
                     setPointsCounterToZero();
                     setComponentsVisibility(winningPicture);
                     confirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -244,18 +244,24 @@ class HangJPanel extends JPanel {
 
                     String currentGuessingPlayer = getGuessingPlayerTitle().getText();
                     if (currentGuessingPlayer.equals(loginPanel.getPlayer1().getText() + " zgaduje"))
-                        setPointPlayer1();
+                        setPointPlayer1(1);
                     else
-                        setPointPlayer2();
+                        setPointPlayer2(1);
 
                 }
                 //---------OPCJA PRZEGRANA------------------
                 else if (getPointsCounter() == 10) {
-                    totalGamesCounter += 1;
+                    totalGamesCounter++;
                     setComponentsVisibility(loosingPicture);
                     setPointsCounterToZero();
                     confirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     confirm.requestFocusInWindow();
+
+                    String currentGuessingPlayer = getGuessingPlayerTitle().getText();
+                    if (currentGuessingPlayer.equals(loginPanel.getPlayer1().getText() + " zgaduje"))
+                        setPointPlayer1(0);
+                    else
+                        setPointPlayer2(0);
                 }
             });
         }
@@ -394,16 +400,16 @@ class HangJPanel extends JPanel {
         return pointPlayer1;
     }
 
-    private void setPointPlayer1() {
-        HangJPanel.pointPlayer1 = 1;
+    private void setPointPlayer1(int point) {
+        HangJPanel.pointPlayer1 = point;
     }
 
     int getPointPlayer2() {
         return pointPlayer2;
     }
 
-    private void setPointPlayer2() {
-        HangJPanel.pointPlayer2 = 1;
+    private void setPointPlayer2(int point) {
+        HangJPanel.pointPlayer2 = point;
     }
 
     void setWordToGuess(String wordToGuess) {

@@ -199,8 +199,10 @@ class MyFrame extends JFrame {
 
                 hangJPanel.getConfirm().addActionListener(e1 -> {
 
-                    if (HangJPanel.totalGamesCounter == 2) {
+                    if (HangJPanel.totalGamesCounter % 2 == 0) {
                         resultPanel = new ResultPanel(hangJPanel);
+                        resultPanel.getPlayer1().setText(loginPanel.getPlayer1().getText() + ": " + resultPanel.getPoints1());
+                        resultPanel.getPlayer2().setText(loginPanel.getPlayer2().getText() + ": " + resultPanel.getPoints2());
                         getContentPane().add(resultPanel);
                         getContentPane().remove(hangJPanel);
                         repaint();
@@ -227,6 +229,63 @@ class MyFrame extends JFrame {
 
                         resultPanel.getConfirm().addActionListener(e2 ->
                                 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
+
+                        resultPanel.getPlay().addKeyListener(new KeyListener() {
+                            @Override
+                            public void keyTyped(KeyEvent e) {
+
+                            }
+
+                            @Override
+                            public void keyPressed(KeyEvent e) {
+                                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                                    resultPanel.getConfirm().doClick();
+                                }
+                            }
+
+                            @Override
+                            public void keyReleased(KeyEvent e) {
+
+                            }
+                        });
+
+                        resultPanel.getPlay().addActionListener(e2 -> {
+
+                            createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + " wymyśla hasło");
+                            createPanel.getCategories().setSelectedIndex(0);
+                            createPanel.getWord().setText("");
+
+                            getContentPane().add(createPanel);
+                            getContentPane().remove(resultPanel);
+                            repaint();
+                            revalidate();
+                        });
+
+                        resultPanel.getNewGame().addKeyListener(new KeyListener() {
+                            @Override
+                            public void keyTyped(KeyEvent e) {
+
+                            }
+
+                            @Override
+                            public void keyPressed(KeyEvent e) {
+                                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                                    resultPanel.getConfirm().doClick();
+                                }
+                            }
+
+                            @Override
+                            public void keyReleased(KeyEvent e) {
+
+                            }
+                        });
+
+                        resultPanel.getNewGame().addActionListener(e2 ->{
+                            getContentPane().add(loginPanel);
+                            getContentPane().remove(resultPanel);
+                            repaint();
+                            revalidate();
+                        });
 
                     } else {
                         createPanel.getLabel().setText(loginPanel.getPlayer2().getText() + " wymyśla hasło");

@@ -4,10 +4,10 @@ import java.util.Random;
 
 class ResultPanel extends JPanel {
 
-    private JButton confirm;
-    private JLabel picture;
+    private JButton finish, play, newGame;
+    private JLabel picture, player1, player2;
     private ImageIcon myPicture;
-    private int pointPlayer1, pointPlayer2;
+    private int pointPlayer1, pointPlayer2, points1, points2;
 
     //animacja
     private static Random random = new Random();
@@ -108,6 +108,9 @@ class ResultPanel extends JPanel {
         this.pointPlayer1 = hangJPanel.getPointPlayer1();
         this.pointPlayer2 = hangJPanel.getPointPlayer2();
 
+        points1 += pointPlayer1;
+        points2 += pointPlayer2;
+
         setLayout(null);
         setBackground(new Color(215,216,218));
 
@@ -118,15 +121,36 @@ class ResultPanel extends JPanel {
     }
 
     private void createLabels() {
+
         picture = new JLabel();
         picture.setBounds(0, 0, 700, 450);
+
+        player1 = new JLabel();
+        player1.setFont(LoginPanel.panelFont);
+        player1.setBounds(100,400,200,40);
+
+        player2 = new JLabel();
+        player2.setFont(LoginPanel.panelFont);
+        player2.setBounds(300,400,200,40);
+
     }
 
     private void createButtons() {
-        confirm = new JButton();
-        confirm.setText("Koniec");
-        confirm.setFont(LoginPanel.panelFont);
-        confirm.setBounds(300, 450, 100, 40);
+
+        play = new JButton();
+        play.setText("Dalej");
+        play.setFont(LoginPanel.panelFont);
+        play.setBounds(274,450,150,40);
+
+        newGame = new JButton();
+        newGame.setText("Od nowa");
+        newGame.setFont(LoginPanel.panelFont);
+        newGame.setBounds(62,450,150,40);
+
+        finish = new JButton();
+        finish.setText("Koniec");
+        finish.setFont(LoginPanel.panelFont);
+        finish.setBounds(486, 450, 150, 40);
     }
 
     private void setPicture() {
@@ -154,10 +178,38 @@ class ResultPanel extends JPanel {
 
     private void add() {
         add(picture);
-        add(confirm);
+        add(finish);
+        add(play);
+        add(newGame);
+//        add(player1);
+//        add(player2);
     }
 
     JButton getConfirm() {
-        return confirm;
+        return finish;
+    }
+
+    JButton getPlay() {
+        return play;
+    }
+
+    JButton getNewGame() {
+        return newGame;
+    }
+
+    public int getPoints1() {
+        return points1;
+    }
+
+    public int getPoints2() {
+        return points2;
+    }
+
+    public JLabel getPlayer1() {
+        return player1;
+    }
+
+    public JLabel getPlayer2() {
+        return player2;
     }
 }
