@@ -19,6 +19,8 @@ class MyFrame extends JFrame {
     private ResultPanel resultPanel;
     private HangJPanel hangJPanel;
 
+    private int pointsPlayer1, pointsPlayer2;
+
     MyFrame() {
 
         playMusic();
@@ -201,8 +203,10 @@ class MyFrame extends JFrame {
 
                     if (HangJPanel.totalGamesCounter % 2 == 0) {
                         resultPanel = new ResultPanel(hangJPanel);
-                        resultPanel.getPlayer1().setText(loginPanel.getPlayer1().getText() + ": " + resultPanel.getPoints1());
-                        resultPanel.getPlayer2().setText(loginPanel.getPlayer2().getText() + ": " + resultPanel.getPoints2());
+                        pointsPlayer1 += resultPanel.getPointPlayer1();
+                        pointsPlayer2 += resultPanel.getPointPlayer2();
+                        resultPanel.getResult().setText(loginPanel.getPlayer1().getText() + " " + pointsPlayer1 + " : "
+                                + pointsPlayer2 + " " + loginPanel.getPlayer2().getText());
                         getContentPane().add(resultPanel);
                         getContentPane().remove(hangJPanel);
                         repaint();
@@ -281,6 +285,8 @@ class MyFrame extends JFrame {
                         });
 
                         resultPanel.getNewGame().addActionListener(e2 ->{
+                            pointsPlayer1 = 0;
+                            pointsPlayer2 = 0;
                             getContentPane().add(loginPanel);
                             getContentPane().remove(resultPanel);
                             repaint();

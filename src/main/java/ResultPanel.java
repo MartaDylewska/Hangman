@@ -5,9 +5,9 @@ import java.util.Random;
 class ResultPanel extends JPanel {
 
     private JButton finish, play, newGame;
-    private JLabel picture, player1, player2;
+    private JLabel picture, result;
     private ImageIcon myPicture;
-    private int pointPlayer1, pointPlayer2, points1, points2;
+    private int pointPlayer1, pointPlayer2;
 
     //animacja
     private static Random random = new Random();
@@ -108,9 +108,6 @@ class ResultPanel extends JPanel {
         this.pointPlayer1 = hangJPanel.getPointPlayer1();
         this.pointPlayer2 = hangJPanel.getPointPlayer2();
 
-        points1 += pointPlayer1;
-        points2 += pointPlayer2;
-
         setLayout(null);
         setBackground(new Color(215,216,218));
 
@@ -125,13 +122,9 @@ class ResultPanel extends JPanel {
         picture = new JLabel();
         picture.setBounds(0, 0, 700, 450);
 
-        player1 = new JLabel();
-        player1.setFont(LoginPanel.panelFont);
-        player1.setBounds(100,400,200,40);
-
-        player2 = new JLabel();
-        player2.setFont(LoginPanel.panelFont);
-        player2.setBounds(300,400,200,40);
+        result = new JLabel();
+        result.setFont(LoginPanel.panelFont);
+        result.setBounds(62,400,200,40);
 
     }
 
@@ -177,12 +170,12 @@ class ResultPanel extends JPanel {
     }
 
     private void add() {
-        add(picture);
+
         add(finish);
         add(play);
         add(newGame);
-//        add(player1);
-//        add(player2);
+        add(result);
+        add(picture);
     }
 
     JButton getConfirm() {
@@ -197,19 +190,15 @@ class ResultPanel extends JPanel {
         return newGame;
     }
 
-    public int getPoints1() {
-        return points1;
+    JLabel getResult() {
+        return result;
     }
 
-    public int getPoints2() {
-        return points2;
+    int getPointPlayer1() {
+        return pointPlayer1;
     }
 
-    public JLabel getPlayer1() {
-        return player1;
-    }
-
-    public JLabel getPlayer2() {
-        return player2;
+    int getPointPlayer2() {
+        return pointPlayer2;
     }
 }
