@@ -6,7 +6,7 @@ import java.util.List;
 
 public class HangJPanelTests {
 
-    HangJPanel hangJPanel = new HangJPanel(new CreatePanel(), new LoginPanel());
+    HangJPanel hangJPanel = new HangJPanel(new CreatePanel(new LoginPanel()), new LoginPanel());
 
     @Test
     public void replaceLettersOK(){

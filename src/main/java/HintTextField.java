@@ -5,10 +5,10 @@ import java.awt.event.FocusListener;
 
 public class HintTextField extends JTextField implements FocusListener {
 
-    private final String hint;
+    private String hint;
     private boolean showingHint;
 
-    HintTextField(final String hint) {
+    HintTextField(String hint) {
         super(hint);
         this.hint = hint;
         this.showingHint = true;

@@ -11,11 +11,17 @@ class CreatePanel extends JPanel {
     private JTextField word;
     private JButton reset, confirm;
     private String message;
+    private int option;
+    private Dictionary dictionary;
 
-    CreatePanel(){ //panel do wymyślania hasła
+    CreatePanel(LoginPanel loginPanel){ //panel do wymyślania hasła
+
+        this.option = loginPanel.getOption();
 
         setLayout(null);
         setBackground(new Color(215,216,218));
+
+        dictionary = Dictionary.getInstance();
 
         createFields();
         createButtons();
@@ -33,10 +39,12 @@ class CreatePanel extends JPanel {
         playerLabel.setBounds(200, 150, 300, 30);
         playerLabel.setFont(LoginPanel.panelFont);
 
-        String[] categoriesOptions = {"--wybierz--", "gra",  "hobby", "imię", "mebel",
-                "miasto", "muzyka", "państwo", "pierwiastek",
-                "pojazd", "potrawy", "przedmiot", "roślina", "rzeka",
-                "sport", "zwierzę", "inne"};
+        String[] categoriesOptions = {dictionary.get("categories0")[option],dictionary.get("categories1")[option],
+                dictionary.get("categories2")[option],dictionary.get("categories3")[option],dictionary.get("categories4")[option],
+                dictionary.get("categories5")[option],dictionary.get("categories6")[option],dictionary.get("categories7")[option],
+                dictionary.get("categories8")[option],dictionary.get("categories9")[option],dictionary.get("categories10")[option],
+                dictionary.get("categories11")[option],dictionary.get("categories12")[option],dictionary.get("categories13")[option],
+                dictionary.get("categories14")[option],dictionary.get("categories15")[option],dictionary.get("categories16")[option]};
 
 
         categories = new JComboBox<>(categoriesOptions);
@@ -44,18 +52,18 @@ class CreatePanel extends JPanel {
         categories.setFont(LoginPanel.panelFont);
         categories.setBorder(MyFrame.blackBorder());
 
-        word = new HintTextField("Hasło");
+        word = new HintTextField(dictionary.get("word")[option]);
         word.setFont(LoginPanel.hintFont);
         word.setForeground(Color.gray);
         word.setBounds(200, 250, 300, 30);
-        word.setToolTipText("Tylko małe litery polskiego alfabetu (wyłącznie pierwsza litera może być wielka)");
+        word.setToolTipText(dictionary.get("tip")[option]);
         word.setBorder(MyFrame.blackBorder());
     }
 
     private void createButtons(){
 
         reset = new JButton();
-        reset.setText("Wyczyść");
+        reset.setText(dictionary.get("reset")[option]);
         reset.setBounds(200, 300, 150, 30);
         reset.setFont(LoginPanel.panelFont);
 
@@ -85,18 +93,18 @@ class CreatePanel extends JPanel {
     boolean check(){
         boolean isNotEmpty = categories.getSelectedIndex() != 0 && word.getText().length() != 0;
 
-        Pattern pattern = Pattern.compile("[A-ZĆŁÓŚŻŹa-zćłóśżź][a-ząćęłńóśżź]+");
+        Pattern pattern = Pattern.compile(dictionary.get("wordPattern")[option]);
         Matcher matcher = pattern.matcher(word.getText());
         boolean isCorrect = matcher.matches();
 
         boolean isProperLength = word.getText().length()<=32;
 
         if(!isNotEmpty)
-            message = "Uzupełnij dane.";
+            message = dictionary.get("message1")[option];
         else if(!isCorrect)
-            message = "Niedozwolone hasło.";
+            message = dictionary.get("message3")[option];
         else if(!isProperLength)
-            message = "Zbyt długie hasło. \n Max 32 litery.";
+            message = dictionary.get("message4")[option];
         return isNotEmpty && isCorrect && isProperLength;
     }
 

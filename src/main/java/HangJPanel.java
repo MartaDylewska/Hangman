@@ -31,7 +31,9 @@ class HangJPanel extends JPanel {
     private JButton confirm;
     private JLabel finalWordField;
     private KeyListener kl;
+    private int option;
     static int totalGamesCounter;
+    private Dictionary dictionary;
 
     HangJPanel(CreatePanel createPanel, LoginPanel loginPanel) {
 
@@ -41,6 +43,9 @@ class HangJPanel extends JPanel {
 
         this.player1 = loginPanel.getPlayer1().getText();
         this.player2 = loginPanel.getPlayer2().getText();
+        this.option = loginPanel.getOption();
+
+        dictionary = Dictionary.getInstance();
 
         setLayout(null);
         setBackground(panelBackgroundColor);
@@ -128,7 +133,7 @@ class HangJPanel extends JPanel {
 
     private void createFinalWordTitle() {
         finalWordField = new JLabel();
-        finalWordField.setText("<html>" + "Hasło: " + wordToGuess + "</html>");
+        finalWordField.setText("<html>" + dictionary.get("word1")[option] + wordToGuess + "</html>");
         finalWordField.setVisible(false);
         finalWordField.setBounds(30, 450, 400, 40);
         finalWordField.setBackground(panelBackgroundColor);
@@ -160,13 +165,13 @@ class HangJPanel extends JPanel {
         categoryField.setBackground(panelBackgroundColor);
 
         categoryChbx = new JCheckBox();
-        categoryChbx.setText("Pokaż kategorię");
+        categoryChbx.setText(dictionary.get("categoryShow")[option]);
         categoryChbx.setBounds(20, 100, 200, 80);
         categoryChbx.setFont(panelFont);
         categoryChbx.setBackground(panelBackgroundColor);
         categoryChbx.setSelected(false);
         categoryChbx.addActionListener(e -> {
-            categoryField.setText("Kategoria: " + Objects.requireNonNull(createPanel.getCategories().getSelectedItem()).toString());
+            categoryField.setText(dictionary.get("category")[option] + Objects.requireNonNull(createPanel.getCategories().getSelectedItem()).toString());
             categoryField.setVisible(true);
             categoryChbx.setVisible(false);
         });
@@ -183,16 +188,18 @@ class HangJPanel extends JPanel {
         for (int i = 0; i < 26; i++) {
             buttonList.add(new JButton(((char) (i + 'A')) + ""));
         }
-        //polskie znaki na klawiaturze
-        buttonList.add(new JButton("Ą"));
-        buttonList.add(new JButton("Ć"));
-        buttonList.add(new JButton("Ę"));
-        buttonList.add(new JButton("Ł"));
-        buttonList.add(new JButton("Ń"));
-        buttonList.add(new JButton("Ó"));
-        buttonList.add(new JButton("Ś"));
-        buttonList.add(new JButton("Ź"));
-        buttonList.add(new JButton("Ż"));
+        if(option == 0) {
+            //polskie znaki na klawiaturze
+            buttonList.add(new JButton("Ą"));
+            buttonList.add(new JButton("Ć"));
+            buttonList.add(new JButton("Ę"));
+            buttonList.add(new JButton("Ł"));
+            buttonList.add(new JButton("Ń"));
+            buttonList.add(new JButton("Ó"));
+            buttonList.add(new JButton("Ś"));
+            buttonList.add(new JButton("Ź"));
+            buttonList.add(new JButton("Ż"));
+        }
 
         for (JButton b : buttonList) {
 
@@ -243,7 +250,7 @@ class HangJPanel extends JPanel {
                     confirm.requestFocusInWindow();
 
                     String currentGuessingPlayer = getGuessingPlayerTitle().getText();
-                    if (currentGuessingPlayer.equals(loginPanel.getPlayer1().getText() + " zgaduje"))
+                    if (currentGuessingPlayer.equals(loginPanel.getPlayer1().getText() + dictionary.get("guess")[option]))
                         setPointPlayer1(1);
                     else
                         setPointPlayer2(1);
@@ -258,7 +265,7 @@ class HangJPanel extends JPanel {
                     confirm.requestFocusInWindow();
 
                     String currentGuessingPlayer = getGuessingPlayerTitle().getText();
-                    if (currentGuessingPlayer.equals(loginPanel.getPlayer1().getText() + " zgaduje"))
+                    if (currentGuessingPlayer.equals(loginPanel.getPlayer1().getText() + dictionary.get("guess")[option]))
                         setPointPlayer1(0);
                     else
                         setPointPlayer2(0);
@@ -346,6 +353,8 @@ class HangJPanel extends JPanel {
         confirm.setFont(panelFont);
         confirm.setBounds(600, 450, 80, 40);
         confirm.setVisible(false);
+        confirm.setBorder(null);
+        confirm.setContentAreaFilled(false);
     }
 
     JButton getConfirm() {
@@ -393,7 +402,7 @@ class HangJPanel extends JPanel {
             this.player2 = loginPanel.getPlayer2().getText();
         }
         //ustawiamy kto ma zgadywać
-        this.getGuessingPlayerTitle().setText(this.player2 + " zgaduje");
+        this.getGuessingPlayerTitle().setText(this.player2 + dictionary.get("guess")[option]);
     }
 
     int getPointPlayer1() {

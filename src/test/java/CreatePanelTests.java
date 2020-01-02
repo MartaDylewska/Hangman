@@ -3,7 +3,7 @@ import org.junit.Test;
 
 public class CreatePanelTests {
 
-    CreatePanel createPanel = new CreatePanel();
+    CreatePanel createPanel = new CreatePanel(new LoginPanel());
 
     @Test
     public void wordToGuessIsZeroLength(){

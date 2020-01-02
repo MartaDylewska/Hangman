@@ -4,6 +4,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.plaf.DesktopIconUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
@@ -19,11 +20,21 @@ class MyFrame extends JFrame {
     private ResultPanel resultPanel;
     private HangJPanel hangJPanel;
 
-    private int pointsPlayer1, pointsPlayer2;
+    private int pointsPlayer1, pointsPlayer2, option;
+    private Dictionary dictionary;
 
     MyFrame() {
 
         playMusic();
+
+//        "javax.swing.plaf.metal.MetalLookAndFeel"
+//        "javax.swing.plaf.nimbus.NimbusLookAndFeel"
+
+/*        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }*/
 
         try {
             URL iconURL = getClass().getResource(hangmanIconName);
@@ -46,6 +57,9 @@ class MyFrame extends JFrame {
         int posY = height / 2 - getHeight() / 2;
 
         setLocation(posX, posY);
+
+        dictionary = Dictionary.getInstance();
+
         loginPanel = new LoginPanel();
 
         getContentPane().add(loginPanel);
@@ -117,10 +131,11 @@ class MyFrame extends JFrame {
 
         loginPanel.getConfirm().addActionListener(e -> {
 
-            createPanel = new CreatePanel();
+            createPanel = new CreatePanel(loginPanel);
+            option = loginPanel.getOption();
             if (loginPanel.check()) {
 
-                createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + " wymyśla hasło");
+                createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + dictionary.get("guess")[option]);
                 getContentPane().add(createPanel);
                 getContentPane().remove(loginPanel);
                 repaint();
@@ -202,7 +217,7 @@ class MyFrame extends JFrame {
                 hangJPanel.getConfirm().addActionListener(e1 -> {
 
                     if (HangJPanel.totalGamesCounter % 2 == 0) {
-                        resultPanel = new ResultPanel(hangJPanel);
+                        resultPanel = new ResultPanel(loginPanel, hangJPanel);
                         pointsPlayer1 += resultPanel.getPointPlayer1();
                         pointsPlayer2 += resultPanel.getPointPlayer2();
                         resultPanel.getResult().setText(loginPanel.getPlayer1().getText() + " " + pointsPlayer1 + " : "
@@ -255,7 +270,7 @@ class MyFrame extends JFrame {
 
                         resultPanel.getPlay().addActionListener(e2 -> {
 
-                            createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + " wymyśla hasło");
+                            createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + dictionary.get("guess")[option]);
                             createPanel.getCategories().setSelectedIndex(0);
                             createPanel.getWord().setText("");
 
@@ -294,7 +309,7 @@ class MyFrame extends JFrame {
                         });
 
                     } else {
-                        createPanel.getLabel().setText(loginPanel.getPlayer2().getText() + " wymyśla hasło");
+                        createPanel.getLabel().setText(loginPanel.getPlayer2().getText() + dictionary.get("guess")[option]);
                         createPanel.getCategories().setSelectedIndex(0);
                         createPanel.getWord().setText("");
 

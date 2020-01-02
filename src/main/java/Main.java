@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
+//            MyFrame.setDefaultLookAndFeelDecorated(true);
             MyFrame window;
             window = new MyFrame();
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -15,15 +16,13 @@ public class Main {
         });
 
         LoginPanel loginPanel = new LoginPanel();
-        CreatePanel createPanel = new CreatePanel();
+        CreatePanel createPanel = new CreatePanel(loginPanel);
         HangJPanel hangJPanel = new HangJPanel(createPanel, loginPanel);
-        ResultPanel resultPanel = new ResultPanel(hangJPanel);
+        ResultPanel resultPanel = new ResultPanel(loginPanel, hangJPanel);
 
         ResultPanel.setLocal();
         resultPanel.animation();
 
     }
-
-
 }
 

@@ -7,7 +7,8 @@ class ResultPanel extends JPanel {
     private JButton finish, play, newGame;
     private JLabel picture, result;
     private ImageIcon myPicture;
-    private int pointPlayer1, pointPlayer2;
+    private int pointPlayer1, pointPlayer2, option;
+    private Dictionary dictionary;
 
     //animacja
     private static Random random = new Random();
@@ -103,13 +104,16 @@ class ResultPanel extends JPanel {
         }
     }
 
-    ResultPanel(HangJPanel hangJPanel) { //ostatnie okno z końcowymi wynikami gry
+    ResultPanel(LoginPanel loginPanel, HangJPanel hangJPanel) { //ostatnie okno z końcowymi wynikami gry
 
         this.pointPlayer1 = hangJPanel.getPointPlayer1();
         this.pointPlayer2 = hangJPanel.getPointPlayer2();
+        this.option = loginPanel.getOption();
 
         setLayout(null);
         setBackground(new Color(215,216,218));
+
+        dictionary = Dictionary.getInstance();
 
         createLabels();
         createButtons();
@@ -131,17 +135,17 @@ class ResultPanel extends JPanel {
     private void createButtons() {
 
         play = new JButton();
-        play.setText("Dalej");
+        play.setText(dictionary.get("play")[option]);
         play.setFont(LoginPanel.panelFont);
         play.setBounds(274,450,150,40);
 
         newGame = new JButton();
-        newGame.setText("Od nowa");
+        newGame.setText(dictionary.get("newGame")[option]);
         newGame.setFont(LoginPanel.panelFont);
         newGame.setBounds(62,450,150,40);
 
         finish = new JButton();
-        finish.setText("Koniec");
+        finish.setText(dictionary.get("end")[option]);
         finish.setFont(LoginPanel.panelFont);
         finish.setBounds(486, 450, 150, 40);
     }

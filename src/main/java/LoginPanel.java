@@ -8,18 +8,26 @@ class LoginPanel extends JPanel{
     private JTextField player1, player2;
     private JButton reset, confirm;
     private String message;
+    private int option;
+    private JRadioButton polish, english;
+    private Dictionary dictionary;
+
     static Font panelFont = new Font("Comic Sans MS", Font.PLAIN, 18);
     static Font hintFont = new Font("Comic Sans MS", Font.ITALIC, 18);
-
 
     LoginPanel(){ //panel wpisywania graczy
 
         setLayout(null);
 
         setBackground(new Color(215,216,218));
+
+        dictionary = Dictionary.getInstance();
+
         createFields();
         createButtons();
+        createRadios();
         setImage();
+        setTexts(option);
         add();
         actions();
 
@@ -31,27 +39,32 @@ class LoginPanel extends JPanel{
         imageLabel.setBounds(20,400,200, 100);
 
         playersLabel = new JLabel();
-        playersLabel.setText("Podaj graczy:");
         playersLabel.setBounds(200, 150, 300, 30);
         playersLabel.setFont(panelFont);
 
-        player1 = new HintTextField("Gracz 1");
+        player1 = new HintTextField(dictionary.get("play1")[option]);
         player1.setBounds(200, 200, 300, 30);
         player1.setFont(hintFont);
         player1.setForeground(Color.gray);
         player1.setBorder(MyFrame.blackBorder());
 
-        player2 = new HintTextField("Gracz 2");
+        player2 = new HintTextField(dictionary.get("play2")[option]);
         player2.setBounds(200, 250, 300, 30);
         player2.setFont(hintFont);
         player2.setForeground(Color.gray);
         player2.setBorder(MyFrame.blackBorder());
     }
 
+    private void setTexts(int option){
+        playersLabel.setText(dictionary.get("plays")[option]);
+        player1.setText(dictionary.get("play1")[option]);
+        player2.setText(dictionary.get("play2")[option]);
+        reset.setText(dictionary.get("reset")[option]);
+    }
+
     private void createButtons(){
 
         reset = new JButton();
-        reset.setText("Wyczyść");
         reset.setBounds(200, 300, 150, 30);
         reset.setFont(panelFont);
 
@@ -59,6 +72,22 @@ class LoginPanel extends JPanel{
         confirm.setText("OK");
         confirm.setBounds(350, 300, 150, 30);
         confirm.setFont(panelFont);
+    }
+
+    private void createRadios(){
+
+        english = new JRadioButton("en");
+        english.setBounds(550,20,50,50);
+        english.setBackground(new Color(215,216,218));
+
+        polish = new JRadioButton("pl");
+        polish.setBounds(600,20,50,50);
+        polish.setSelected(true);
+        polish.setBackground(new Color(215,216,218));
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(english);
+        group.add(polish);
     }
 
     private void add(){
@@ -69,6 +98,8 @@ class LoginPanel extends JPanel{
         add(player2);
         add(reset);
         add(confirm);
+        add(polish);
+        add(english);
     }
 
     private void actions(){
@@ -76,6 +107,16 @@ class LoginPanel extends JPanel{
         reset.addActionListener(e -> {
             player1.setText("");
             player2.setText("");
+        });
+
+        english.addActionListener(e -> {
+            option = 1;
+            setTexts(option);
+        });
+
+        polish.addActionListener(e -> {
+            option = 0;
+            setTexts(option);
         });
     }
 
@@ -94,9 +135,9 @@ class LoginPanel extends JPanel{
         boolean isDifferent = !(player1.getText().equals(player2.getText()));
 
         if(!isNotEmpty)
-            message = "Uzupełnij dane.";
+            message = dictionary.get("message1")[option];
         else if(!isDifferent)
-            message = "Nazwy graczy nie mogą być takie same.";
+            message = dictionary.get("message2")[option];
 
         return isNotEmpty && isDifferent;
     }
@@ -118,5 +159,9 @@ class LoginPanel extends JPanel{
 
     String getMessage(){
         return message;
+    }
+
+    int getOption() {
+        return option;
     }
 }
