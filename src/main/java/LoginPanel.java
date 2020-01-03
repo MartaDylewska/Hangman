@@ -76,12 +76,12 @@ class LoginPanel extends JPanel{
 
     private void createRadios(){
 
-        english = new JRadioButton("en");
-        english.setBounds(550,20,50,50);
+        english = new JRadioButton(new ImageIcon(this.getClass().getResource("uk20.png")));
+        english.setBounds(570,20,30,30);
         english.setBackground(new Color(215,216,218));
 
-        polish = new JRadioButton("pl");
-        polish.setBounds(600,20,50,50);
+        polish = new JRadioButton(new ImageIcon(this.getClass().getResource("pl20.png")));
+        polish.setBounds(600,20,30,30);
         polish.setSelected(true);
         polish.setBackground(new Color(215,216,218));
 

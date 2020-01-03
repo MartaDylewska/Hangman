@@ -128,7 +128,7 @@ class ResultPanel extends JPanel {
 
         result = new JLabel();
         result.setFont(LoginPanel.panelFont);
-        result.setBounds(62,400,200,40);
+        result.setBounds(62,390,200,40);
 
     }
 
@@ -137,17 +137,17 @@ class ResultPanel extends JPanel {
         play = new JButton();
         play.setText(dictionary.get("play")[option]);
         play.setFont(LoginPanel.panelFont);
-        play.setBounds(274,450,150,40);
+        play.setBounds(274,430,150,40);
 
         newGame = new JButton();
         newGame.setText(dictionary.get("newGame")[option]);
         newGame.setFont(LoginPanel.panelFont);
-        newGame.setBounds(62,450,150,40);
+        newGame.setBounds(62,430,150,40);
 
         finish = new JButton();
         finish.setText(dictionary.get("end")[option]);
         finish.setFont(LoginPanel.panelFont);
-        finish.setBounds(486, 450, 150, 40);
+        finish.setBounds(486, 430, 150, 40);
     }
 
     private void setPicture() {

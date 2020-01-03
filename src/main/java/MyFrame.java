@@ -47,7 +47,7 @@ class MyFrame extends JFrame {
         }
 
         setSize(700,530);
-        setTitle("Szubienica");
+        setTitle("Hangman / Szubienica");
         setResizable(false);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

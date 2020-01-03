@@ -62,6 +62,10 @@ class HangJPanel extends JPanel {
         add(categoryChbx);
         createWordToGuessField();
         add(wordToGuessField);
+        createConfirmBtn();
+        add(confirm);
+        createFinalWordTitle();
+        add(finalWordField);
         try {
             createWinningPicture();
         } catch (Exception ex) {
@@ -74,10 +78,6 @@ class HangJPanel extends JPanel {
             System.out.println("Problem with file: lost.gif");
         }
         add(loosingPicture);
-        createConfirmBtn();
-        add(confirm);
-        createFinalWordTitle();
-        add(finalWordField);
         defineKeyListener();
         categoryChbx.addKeyListener(kl);
         for (JButton b : buttonList) {
@@ -135,7 +135,7 @@ class HangJPanel extends JPanel {
         finalWordField = new JLabel();
         finalWordField.setText("<html>" + dictionary.get("word1")[option] + wordToGuess + "</html>");
         finalWordField.setVisible(false);
-        finalWordField.setBounds(30, 450, 400, 40);
+        finalWordField.setBounds(30, 430, 400, 40);
         finalWordField.setBackground(panelBackgroundColor);
         finalWordField.setFont(panelFont);
     }
@@ -351,7 +351,7 @@ class HangJPanel extends JPanel {
         confirm = new JButton();
         confirm.setText(">>");
         confirm.setFont(panelFont);
-        confirm.setBounds(600, 450, 80, 40);
+        confirm.setBounds(600, 430, 80, 40);
         confirm.setVisible(false);
         confirm.setBorder(null);
         confirm.setContentAreaFilled(false);
