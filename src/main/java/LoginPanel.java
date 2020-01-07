@@ -11,6 +11,7 @@ class LoginPanel extends JPanel{
     private int option;
     private JRadioButton polish, english;
     private Dictionary dictionary;
+    private ButtonGroup group;
 
     static Font panelFont = new Font("Comic Sans MS", Font.PLAIN, 18);
     static Font hintFont = new Font("Comic Sans MS", Font.ITALIC, 18);
@@ -82,10 +83,9 @@ class LoginPanel extends JPanel{
 
         polish = new JRadioButton(new ImageIcon(this.getClass().getResource("pl20.png")));
         polish.setBounds(600,20,30,30);
-        polish.setSelected(true);
         polish.setBackground(new Color(215,216,218));
 
-        ButtonGroup group = new ButtonGroup();
+        group = new ButtonGroup();
         group.add(english);
         group.add(polish);
     }

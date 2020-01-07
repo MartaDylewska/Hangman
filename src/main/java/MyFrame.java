@@ -135,7 +135,7 @@ class MyFrame extends JFrame {
             option = loginPanel.getOption();
             if (loginPanel.check()) {
 
-                createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + dictionary.get("guess")[option]);
+                createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + dictionary.get("invent")[option]);
                 getContentPane().add(createPanel);
                 getContentPane().remove(loginPanel);
                 repaint();
@@ -270,7 +270,7 @@ class MyFrame extends JFrame {
 
                         resultPanel.getPlay().addActionListener(e2 -> {
 
-                            createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + dictionary.get("guess")[option]);
+                            createPanel.getLabel().setText(loginPanel.getPlayer1().getText() + dictionary.get("invent")[option]);
                             createPanel.getCategories().setSelectedIndex(0);
                             createPanel.getWord().setText("");
 
@@ -309,7 +309,7 @@ class MyFrame extends JFrame {
                         });
 
                     } else {
-                        createPanel.getLabel().setText(loginPanel.getPlayer2().getText() + dictionary.get("guess")[option]);
+                        createPanel.getLabel().setText(loginPanel.getPlayer2().getText() + dictionary.get("invent")[option]);
                         createPanel.getCategories().setSelectedIndex(0);
                         createPanel.getWord().setText("");
 
