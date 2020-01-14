@@ -1,9 +1,9 @@
 # Hangman
 Hania &amp; Marta hangman for C_School workshop
-![login](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/Login.PNG)
-![create](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/Create.PNG)
-![hang](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/Hangman.PNG)
-![onewon](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/OneWon.PNG)
-![onelost](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/OneLost.PNG)
-![result](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/Result_lost.PNG)
-![result](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/Result_won.PNG)
+![login](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/login1.png)
+![create](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/create1.png)
+![hang](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/guess1.png.PNG)
+![onewon](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/won1.png)
+![onelost](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/lost1.png)
+![result](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/finish1.png)
+![result](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/finish2.png)
