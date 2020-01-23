@@ -1,5 +1,5 @@
 # Hangman
-Hania &amp; Marta hangman for C_School workshop.
+Hania &amp; Marta hangman for C_School workshop. <br>
 .jar file in target, enjoy!
 
 ![login](https://github.com/MartaDylewska/Hangman/blob/master/src/main/resources/login1.png)
